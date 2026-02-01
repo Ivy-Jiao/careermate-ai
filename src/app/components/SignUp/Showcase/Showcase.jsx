@@ -6,7 +6,7 @@ import UserReview from "@/app/components/SignUp/Showcase/components/UserReview";
 
 const Showcase = () => (
     <div>
-        <p>Showcase</p>
+      <h1>ShowCase</h1>
         <Advantages />
         <SubscribeLink />
         <UserReview />
