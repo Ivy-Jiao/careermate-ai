@@ -1,6 +1,7 @@
+import Link from 'next/link';
 const SubscribeLink = () => (
     <div>
-        <a href="subscribe">SubscribeLink</a>
+        <Link href="/subscribe">SubscribeLink</Link>
     </div>
 );
 

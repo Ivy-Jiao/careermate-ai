@@ -1,5 +1,5 @@
-const { default: Form } = require("@/app/components/SignUp/Form/Form");
-const { default: Showcase } = require("@/app/components/SignUp/Showcase");
+import Form from "@/app/components/SignUp/Form/Form";
+import Showcase from "@/app/components/SignUp/Showcase";
 
 const SignUp = () => (
     <div>
@@ -8,3 +8,5 @@ const SignUp = () => (
         <Showcase />
     </div>
 );
+
+export default SignUp;

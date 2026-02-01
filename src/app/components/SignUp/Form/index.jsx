@@ -1,1 +1,1 @@
-export { default } from '@/app/components/SignUp/Form';
+export { default } from './Form';
