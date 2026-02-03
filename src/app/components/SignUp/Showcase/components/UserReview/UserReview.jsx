@@ -1,7 +1,20 @@
+import Image from "next/image";
+import userPhoto from "@/app/components/SignUp/Showcase/components/UserReview/assets/user@2x.png";
+
 const UserReview = () => (
-    <div>
-        <p>UserReview</p>
+  <div className="mt-10 -ml-16 w-46 rounded-3xl bg-white p-5 shadow-2xl">
+    <div className="flex items-center gap-3">
+      <Image
+        className="rounded-full"
+        src={userPhoto}
+        alt="Username"
+        width={36}
+        height={36}
+      />
+      <div className="font-bold">Username</div>
     </div>
+    <div className="mt-3">Tried many, but this Al stands out!🔥</div>
+  </div>
 );
 
 export default UserReview;
