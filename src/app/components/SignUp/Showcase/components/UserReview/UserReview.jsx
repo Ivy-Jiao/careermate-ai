@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import userPhoto from "@/app/components/SignUp/Showcase/components/UserReview/assets/user@2x.png";
 
 const UserReview = () => (
@@ -13,7 +14,7 @@ const UserReview = () => (
       />
       <div className="font-bold">Username</div>
     </div>
-    <div className="mt-3">Tried many, but this Al stands out!🔥</div>
+    <div className="mt-3">Tried many, but this Al stands out! 🔥</div>
   </div>
 );
 
