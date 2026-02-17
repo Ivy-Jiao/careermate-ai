@@ -1,27 +1,100 @@
-import Button from "@/app/components/SignUp/Form/components/Button";
-import Field from "@/app/components/SignUp/Form/components/Field";
-import LoginLink from "@/app/components/SignUp/Form/components/LoginLink";
+"use client";
 
-const Form = () => (
-  <form className="my-auto px-[125px]">
-    <div className="mb-16">
-      <h1 className="text-[40px] font-black">Create Your Account</h1>
-      <p className="mt-3 text-sm text-gray-700">
-        Join CareerMate AI and start your smart career journey
-      </p>
-    </div>
+import { useState } from "react";
+import { isEmail, isEmpty, isStrongPassword } from "validator";
 
-    <div className="space-y-6">
-      <Field label="Full Name" placeholder={"Your full name"} />
-      <Field label="Email" placeholder={"Your email"} />
-      <Field label="Password" placeholder={"Create a password"} />
-    </div>
+import Button from "./components/Button";
+import Field from "./components/Field";
+import LoginLink from "./components/LoginLink";
 
-    <div className="mt-10 space-y-6">
-      <Button>Create Account</Button>
-      <LoginLink />
-    </div>
-  </form>
-);
+const getError = (value, errors) =>
+  errors.find((error) => error.match(value))?.message || "";
+
+const Form = () => {
+  const [fullName, setFullName] = useState("");
+  const fullNameError = getError(fullName, [
+    {
+      match: (value) => isEmpty(value),
+      message: "Please enter your full name",
+    },
+  ]);
+
+  const [email, setEmail] = useState("");
+  const emailError = getError(email, [
+    {
+      match: (value) => isEmpty(value),
+      message: "Please enter your email",
+    },
+    {
+      match: (value) => !isEmail(value),
+      message: "Please enter a valid email address",
+    },
+  ]);
+
+  const [password, setPassword] = useState("");
+  const passwordError = getError(password, [
+    {
+      match: (value) => isEmpty(value),
+      message: "Please enter your password",
+    },
+    {
+      match: (value) => !isStrongPassword(value),
+      message: "Password must be at least 8 characters long",
+    },
+  ]);
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  return (
+    <form className="my-auto px-[125px]">
+      <div className="mb-16">
+        <h1 className="text-[40px] font-black">Create Your Account</h1>
+        <p className="mt-3 text-sm text-gray-700">
+          Join CareerMate AI and start your smart career journey
+        </p>
+      </div>
+
+      <div className="space-y-8">
+        <Field
+          value={fullName}
+          onChange={(event) => setFullName(event.target.value)}
+          label="Full Name"
+          placeholder="Your full name"
+          error={isSubmitted && fullNameError}
+        />
+        <Field
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          label="Email"
+          placeholder="Your email"
+          error={isSubmitted && emailError}
+        />
+        <Field
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          label="Password"
+          type="password"
+          placeholder="Create a password"
+          error={isSubmitted && passwordError}
+        />
+      </div>
+
+      <div className="mt-10 space-y-6">
+        <Button
+          onClick={(event) => {
+            event.preventDefault();
+
+            setIsSubmitted(true);
+
+            console.log({ fullName, email, password });
+          }}
+        >
+          Create Account
+        </Button>
+        <LoginLink />
+      </div>
+    </form>
+  );
+};
 
 export default Form;
