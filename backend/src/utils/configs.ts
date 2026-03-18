@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const requiredConfigs = {
-    MONGODB_UR: process.env.MONGODB_URI,
+    MONGODB_URI: process.env.MONGODB_URI,
 };
 
 const optionalConfigs = {
