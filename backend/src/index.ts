@@ -1,7 +1,7 @@
-const app = require('./app');
-const config = require('@utils/configs');
-const connectDB = require('@utils/db');
-const logger = require('@utils/logger');
+import app from './app.js';
+import config from '@utils/configs.js';
+import connectDB from '@utils/db.js';
+import logger from '@utils/logger.js';
 
 process.on('unhandledRejection', (err) => {
     logger.error('unhandled rejection', {err});

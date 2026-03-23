@@ -1,7 +1,7 @@
-const morgan = require('morgan');
-const logger = require('@utils/logger');
-const config = require('@utils/configs');
+import morgan from 'morgan';
+import logger from '@utils/logger.js';
+import config from '@utils/configs.js';
 
-module.exports = morgan(config.NODE_ENV !== 'dev' ? 'combined' : 'dev', {
+export default morgan(config.NODE_ENV !== 'dev' ? 'combined' : 'dev', {
 	stream: { write: (msg: string) => logger.info(msg.trim()) },
 });

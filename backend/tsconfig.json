@@ -6,25 +6,14 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      "@auth/*": [
-        "auth/*"
-      ],
-      "@exceptions/*": [
-        "exceptions/*"
-      ],
-      "@middleware/*": [
-        "middleware/*"
-      ],
-      "@resumes/*": [
-        "resumes/*"
-      ],
-      "@users/*": [
-        "users/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ]
+      "@auth/*": ["auth/*"],
+      "@exceptions/*": ["exceptions/*"],
+      "@middleware/*": ["middleware/*"],
+      "@resumes/*": ["resumes/*"],
+      "@users/*": ["users/*"],
+      "@utils/*": ["utils/*"]
     },
+
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
@@ -52,7 +41,6 @@
     // "noPropertyAccessFromIndexSignature": true,
     // Recommended Options
     "strict": true,
-    "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,

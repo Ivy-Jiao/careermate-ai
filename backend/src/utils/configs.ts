@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 
 const requiredConfigs = {
     MONGODB_URI: process.env.MONGODB_URI,
@@ -17,7 +17,7 @@ for (const key in requiredConfigs) {
     }
 };
 
-module.exports = {
+export default {
     ...optionalConfigs,
     ...requiredConfigs
 };

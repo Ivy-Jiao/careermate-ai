@@ -1,5 +1,5 @@
-const logger = require('@utils/logger');
-const config = require('@utils/configs');
+import logger from '@utils/logger.js';
+import config from '@utils/configs.js';
 import type { Request, Response, NextFunction } from 'express';
 
 interface AppError extends Error {
@@ -36,4 +36,4 @@ const finalErrorHandler = (
   });
 };
 
-module.exports = finalErrorHandler;
+export default finalErrorHandler;

@@ -1,12 +1,13 @@
-const express = require('express');
+import express from 'express';
 // security middleware, avoid common attack
-const helmet = require('helmet');
+import helmet from 'helmet';
 // logging middleware print http request 
-const morgan = require('@middleware/global/morgan');
-const rateLimit = require('@middleware/global/rateLimit');
-const cors = require('cors');
-const setupSwagger = require('@utils/swagger');
-const errorHandler = require('@middleware/error/final.error.middleware');
+import morgan from '@middleware/global/morgan.js';
+import rateLimit from '@middleware/global/rateLimit.js';
+import cors from 'cors';
+import setupSwagger from '@utils/swagger/swagger.js';
+import errorHandler from '@middleware/error/final.error.middleware.js';
+import v1Router from 'routes.js';
 
 const app = express();
 app.use(helmet());
@@ -17,6 +18,7 @@ app.use(express.json());
 
 setupSwagger(app);
 
-app.use(errorHandler);
-module.exports = app;
+app.use('v1', v1Router);
 
+app.use(errorHandler);
+export default app;
