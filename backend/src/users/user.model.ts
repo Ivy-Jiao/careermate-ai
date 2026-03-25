@@ -28,7 +28,7 @@ const userSchema = new Schema<IUserDocument>({
   fullName: { type: String, required: true, trim: true },
   email: { type: String, required: true, trim: true, lowercase: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, required: true, enum: roles },
+  role: { type: String, enum: roles },
   goal: { type: String, trim: true },
   field: { type: String, enum: fields },
   avatar: {
@@ -36,7 +36,15 @@ const userSchema = new Schema<IUserDocument>({
   },
   displayName: { type: String, trim: true },
 }, 
-{ timestamps: true }
+{ 
+  timestamps: true, 
+  toJSON: {
+    transform(_, ret) {
+      const { password, ...rest } = ret;
+      return rest;
+    }
+  }
+} 
 );
 
 // Pre-save hook

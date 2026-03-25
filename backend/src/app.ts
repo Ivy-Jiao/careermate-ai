@@ -18,7 +18,7 @@ app.use(express.json());
 
 setupSwagger(app);
 
-app.use('v1', v1Router);
+app.use('/v1', v1Router);
 
 app.use(errorHandler);
 export default app;
