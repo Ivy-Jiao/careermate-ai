@@ -1,5 +1,5 @@
 import rateLimit from 'express-rate-limit';
-import config from '@utils/configs.js';
+import config from '@utils/config.js';
 
 export default rateLimit({
     windowMs: 1 * 60 * 1000, // 1 min

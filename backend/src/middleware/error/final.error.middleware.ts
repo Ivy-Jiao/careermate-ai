@@ -1,5 +1,5 @@
 import logger from '@utils/logger.js';
-import config from '@utils/configs.js';
+import config from '@utils/config.js';
 import type { Request, Response, NextFunction } from 'express';
 
 interface AppError extends Error {

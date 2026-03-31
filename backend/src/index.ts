@@ -1,5 +1,5 @@
 import app from './app.js';
-import config from '@utils/configs.js';
+import config from '@utils/config.js';
 import connectDB from '@utils/db.js';
 import logger from '@utils/logger.js';
 
