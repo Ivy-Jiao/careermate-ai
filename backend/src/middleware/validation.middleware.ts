@@ -1,3 +1,4 @@
+import ValidationException from '@exceptions/validation.exception.js';
 import type { Request, Response, NextFunction } from 'express';
 import type { ZodType } from 'zod';
 
@@ -8,8 +9,7 @@ const validate =
 
     if (!result.success) {
       const message = result.error.issues.map(i => i.message).join(', ');
-      res.status(400).json({ success: false, message });
-      return;
+      throw new ValidationException(message);
     }
 
 	req.body = result.data;

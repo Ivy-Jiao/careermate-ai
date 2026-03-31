@@ -1,4 +1,7 @@
+import ConflictException from '@exceptions/conflict.exception.js';
+import UnauthorizedException from '@exceptions/unauthorized.exception.js';
 import User from '@users/user.model.js';
+import { signAccessToken } from '@utils/jwt.js';
 import logger from '@utils/logger.js';
 import type { Request, Response } from 'express';
 
@@ -6,21 +9,20 @@ const register = async (req: Request, res: Response) => {
 	const {fullName, email, password} = req.body;
 
 	//check duplicate
-	const existing = await User.findOne({ email });
-	if (existing) {
-		return res.status(400).json({
-		success: false,
-		message: 'Email already registered',
-		});
+	const existingUser = await User.findOne({ email }).exec();
+	if (existingUser) {
+		throw new ConflictException('Email already registered')
 	}
 
 	const user = await User.create({fullName, email, password});
 	logger.info('User registered', {userId: user._id});
 
+	const accessToken = signAccessToken({userId: user._id.toString()});
+
 	res.json({
 		success: true,
 		data: {
-			user,
+			accessToken
 		},
 	});
 };
@@ -29,28 +31,22 @@ const login = async (req: Request, res: Response) => {
 	const {email, password} = req.body;
 
 	const user = await User.findOne({email}).exec();
-
 	if (!user) {
-		return res.status(401).json({
-		success: false,
-		message: 'Invalid email or password',
-		});
+		throw new UnauthorizedException('Invalid email or password. Please try again')
 	}
 
 	const isMatch = await user.comparePassword(password);
 	if (!isMatch) {
-		return res.status(401).json({
-			success: false,
-			data: {
-				message: 'Invalid email or password',
-			}
-		});
+		throw new UnauthorizedException('Invalid email or password. Please try again')
+
 	};
+
+	const accessToken = signAccessToken({userId: user._id.toString()});
 
 	res.json({
 		success: true,
 		data: {
-			user,
+			accessToken
 		}
 	});
 };
